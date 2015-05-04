@@ -7,6 +7,7 @@ public class StrategyFactory {
     private static final String SULFURAS = "Sulfuras, Hand of Ragnaros";
     private static final String BACKSTAGE_PASSES = "Backstage passes to a TAFKAL80ETC concert";
     private static final String AGED_BRIE = "Aged Brie";
+    private static final String CONJURED = "Conjured";
 
     public AbstractStrategy createFor(Item item) {
         AbstractStrategy strategy = new NullStrategy();
@@ -15,11 +16,17 @@ public class StrategyFactory {
             strategy = new AgedBrieStrategy();
         } else if (isBackstagePasses(item)) {
             strategy = new BackstageStrategy();
+        } else if (isConjured(item)) {
+            strategy = new ConjuredStrategy();
         } else if (!isSulfuras(item)) {
             strategy = new OtherStrategy();
         }
 
         return strategy;
+    }
+
+    private boolean isConjured(Item item) {
+        return is(CONJURED, item);
     }
 
     private boolean isSulfuras(Item item) {

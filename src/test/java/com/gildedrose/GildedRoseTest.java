@@ -79,6 +79,14 @@ public class GildedRoseTest {
         assertEquals(0, item.quality);
     }
 
+    @Test
+    public void conjured_item_degrade_quality_twice() throws Exception {
+        Item item = testItem("Conjured", 10, 10);
+
+        assertEquals(9, item.sellIn);
+        assertEquals(8, item.quality);
+    }
+
     private Item testItem(String name, int sellIn, int quality) {
         Item[] items = new Item[] { new Item(name, sellIn, quality) };
         GildedRose app = new GildedRose(items);
